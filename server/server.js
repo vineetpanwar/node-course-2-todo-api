@@ -11,6 +11,7 @@ var app = express();
 
 app.use(bodyParser.json());
 
+//Post request
 app.post('/todos',(req,res) => {
   var todo = new Todo({
     text: req.body.text
@@ -23,6 +24,14 @@ app.post('/todos',(req,res) => {
   });
 
 });
+
+//GetAllReq
+app.get('/todos', (req,res) => {
+  Todo.find().then((todos) => {
+    res.send({todos});
+    });
+});
+
 
 app.listen(3000, () => {
   console.log('server is up at 3000');
