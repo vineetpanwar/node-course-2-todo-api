@@ -1,6 +1,7 @@
 //standard imports
 var express = require('express');
 var bodyParser = require('body-parser');
+var {ObjectID} = require('mongodb');
 
 //local imports
 var {mongoose} = require('./db/mongoose.js');
@@ -32,6 +33,22 @@ app.get('/todos', (req,res) => {
     });
 });
 
+//Get Specific record By Id
+app.get('/todos/:TodoID' , (req,res) => {
+  if(!ObjectID.isValid(req.params.TodoID))
+  {
+    res.status(404).send({});
+  }
+  Todo.findById(req.params.TodoID).then((Todo) => {
+    if(!Todo){
+      res.status(404).send({});
+    }
+    res.status(200).send(JSON.stringify(Todo,undefined,2));
+  }).catch((err) => {
+    res.status(400).send({});
+  })
+
+});
 
 app.listen(3000, () => {
   console.log('server is up at 3000');
