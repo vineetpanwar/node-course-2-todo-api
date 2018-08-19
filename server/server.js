@@ -41,11 +41,11 @@ app.get('/todos/:TodoID' , (req,res) => {
   }
   Todo.findById(req.params.TodoID).then((Todo) => {
     if(!Todo){
-      res.status(404).send({});
+      res.status(404).send();
     }
-    res.status(200).send(JSON.stringify(Todo,undefined,2));
+    res.status(200).send({Todo});
   }).catch((err) => {
-    res.status(400).send({});
+    res.status(400).send();
   })
 
 });
@@ -57,26 +57,6 @@ app.listen(3000, () => {
 module.exports = {
   app
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
