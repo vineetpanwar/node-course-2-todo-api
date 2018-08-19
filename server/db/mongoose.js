@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-const dbuser = 'tfg@123';
+const dbuser = 'tfg123';
 const dbpassword = 'trade123';
 
 mongoose.Promise = global.Promise;
