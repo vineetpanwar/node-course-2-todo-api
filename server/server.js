@@ -9,6 +9,7 @@ var  {Todo} = require('./models/todo.js');
 var  {User} = require('./models/user.js');
 
 var app = express();
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -34,12 +35,13 @@ app.get('/todos', (req,res) => {
 });
 
 //Get Specific record By Id
-app.get('/todos/:TodoID' , (req,res) => {
-  if(!ObjectID.isValid(req.params.TodoID))
+app.get('/todos/:id' , (req,res) => {
+  var id = req.params.id;
+  if(!ObjectID.isValid(id))
   {
     res.status(404).send({});
   }
-  Todo.findById(req.params.TodoID).then((Todo) => {
+  Todo.findById(id).then((Todo) => {
     if(!Todo){
       res.status(404).send();
     }
@@ -50,8 +52,8 @@ app.get('/todos/:TodoID' , (req,res) => {
 
 });
 
-app.listen(3000, () => {
-  console.log('server is up at 3000');
+app.listen(port, () => {
+  console.log(`Started up at port:${port}`);
 });
 
 module.exports = {
