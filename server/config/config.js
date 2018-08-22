@@ -11,9 +11,11 @@ if(env === 'test'){
   process.env.MONGODB_URI = 'mongodb://localhost:27017/TodoTestApp';
 }
 else if(env === 'production'){
-  process.env.MONGODB_URI = `mongodb://${dbuser}:${dbpassword}@ds125862.mlab.com:25862/vindata`;
+  console.log('Here it goes into prod');
+  //process.env.MONGODB_URI = `mongodb://${dbuser}:${dbpassword}@ds125862.mlab.com:25862/vindata`;
 }
 else{
+  console.log('In dev');
   process.env.PORT = 3000;
   process.env.MONGODB_URI = 'mongodb://localhost:27017/TodoApp';
 }
