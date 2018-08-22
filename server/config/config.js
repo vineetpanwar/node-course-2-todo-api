@@ -2,7 +2,7 @@ var env = process.env.NODE_ENV || 'development';
 const dbuser = 'tfg123';
 const dbpassword = 'trade123';
 
-console.log('env is-',process.env.NODE_ENV);
+//console.log('env is-',process.env.NODE_ENV);
 
 
 if(env === 'test'){
