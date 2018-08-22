@@ -1,3 +1,6 @@
+//config file require
+require('./config/config.js');
+
 var mongoose = require('mongoose');
 
 
