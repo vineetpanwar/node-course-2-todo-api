@@ -16,7 +16,7 @@ const port = process.env.PORT ;
 
 app.use(bodyParser.json());
 
-//Post request
+//Post request for Todo
 app.post('/todos',(req,res) => {
   var todo = new Todo({
     text: req.body.text
@@ -27,7 +27,22 @@ app.post('/todos',(req,res) => {
   }).catch((err) => {
     res.status(400).send(err);
   });
+});
 
+//Post request for user
+app.post('/users',(req,res) => {
+  var body = _.pick(req.body,['email','password']);
+  var user = new User(body);
+
+  user.save().then(() => {
+    return user.generateAuthToken();
+  }).then((token) => {
+    //console.log('tokens',tokens.tokens);
+    //var usertoken = tokens.token;
+    res.header('x-auth',token).send(user);
+  }).catch((err) => {
+    res.status(400).send(err);
+  });
 });
 
 //GetAllReq
