@@ -1,5 +1,26 @@
 const {SHA256} = require('crypto-js');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
+//Passwrd hashing
+var password = 'vineet';
+
+bcrypt.genSalt(10,(err,salt) => {
+  bcrypt.hash(password,salt,(err,hash)=>{
+    console.log('hash info',hash);
+  });
+});
+
+var password1 = '$2a$10$GuqqB00yhf28P7hwxLrQJudUCT.4rmzsQlb/fOSpKxBiX9WyYjcQW';
+var password2 = '$2a$10$iKM/3W5r5eVVgX0ngAlzeukdZpXEm/7bhe6qQiL/PEbc26hjUUkzG';
+
+bcrypt.compare(password,password1,(err,res) => {
+  console.log(res);
+});
+
+bcrypt.compare(password,password2,(err,res) => {
+  console.log(res);
+});
 
 
 //javawebtokensauthentication
