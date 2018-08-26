@@ -33,6 +33,7 @@ app.post('/todos',(req,res) => {
 //Post request for user
 app.post('/users',(req,res) => {
   var body = _.pick(req.body,['email','password']);
+  console.log(body);
   var user = new User(body);
 
   user.save().then(() => {

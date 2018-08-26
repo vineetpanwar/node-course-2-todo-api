@@ -13,7 +13,7 @@ var UserSchema = new mongoose.Schema({
     unique:true,
     validate:{
       validator:validator.isEmail,
-      message:'{value} is not a valid email'
+      message:'{VALUE} is not a valid email'
     }
   },
   password:{
@@ -38,7 +38,7 @@ UserSchema.methods.toJSON = function(){
   var user = this;
   var objectUser = user.toObject();
   return(_.pick(objectUser,['_id','email']));
-}
+};
 
 //method to generate the auth token
 UserSchema.methods.generateAuthToken = function() {
@@ -55,7 +55,7 @@ UserSchema.methods.generateAuthToken = function() {
     //var result = _.nth(user.tokens,[n=1]);
     return token;
   });
-}
+};
 
 
 UserSchema.statics.findByToken = function(token) {
@@ -95,7 +95,8 @@ UserSchema.pre('save',function (next){
   else{
     next();
   }
-})
+});
+
 
 var User = mongoose.model('User' , UserSchema);
 module.exports = {
