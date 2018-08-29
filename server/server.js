@@ -31,6 +31,18 @@ app.post('/users/login',(req,res) => {
   });
 });
 
+//Logout requests-deleting token
+app.delete('/users/me/delete',authenticate,(req,res) => {
+  req.user.removeToken(req.token).then(() => {
+    //resolve case
+    res.status(200).send();
+  },() => {
+    //reject case
+    res.status(400).send()
+  });
+});
+
+
 
 //Post request for Todo
 app.post('/todos',(req,res) => {

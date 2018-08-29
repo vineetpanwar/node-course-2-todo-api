@@ -59,7 +59,7 @@ UserSchema.methods.generateAuthToken = function() {
 
 
 UserSchema.statics.findByToken = function(token) {
-  var User = this;
+  var user = this;
   var decoded;
 
   try{
@@ -98,7 +98,7 @@ UserSchema.pre('save',function (next){
 });
 
 UserSchema.statics.findByCredentials = function(email,password) {
-  var User = this;
+  var user = this;
 
   return User.findOne({email}).then((user) => {
       if(!user){
@@ -117,8 +117,15 @@ UserSchema.statics.findByCredentials = function(email,password) {
   });
 };
 
+UserSchema.methods.removeToken = function(token) {
+  var user = this;
 
-
+  return user.update({
+    $pull: {
+      tokens:{token}
+    }
+  });
+};
 
 var User = mongoose.model('User' , UserSchema);
 module.exports = {
